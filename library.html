@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Collection of games</title>
+<link href="library.css" rel="stylesheet">
+</head>
+<body>
+<div id="title">Welcome to my games library</div>
+<button id="add">Add new game</button>
+<table id="library",style="width:100%">
+<tr>
+<th>Developer</th>
+<th>Title</th>
+<th></th>
+</tr>
+</table>
+<script>
+const add = document.getElementById('add');
+const library = document.getElementById('library');
+
+add.onclick = function() {
+  const row = document.createElement('tr');
+  const developer = document.createElement('th');
+  const title = document.createElement('th');
+  const buttons = document.createElement('th');
+  row.appendChild(developer);
+  row.appendChild(title);
+  row.appendChild(buttons);
+  library.appendChild(row);
+  
+  const developer_content = document.createElement('p');
+  const title_content = document.createElement('p');
+  developer_content.style.textAlign = 'left';
+  title_content.style.textAlign = 'left';
+  developer.appendChild(developer_content);
+  title.appendChild(title_content);
+  
+  const developer_input = document.createElement('input');
+  developer.appendChild(developer_input);
+  const title_input = document.createElement('input');
+  title.appendChild(title_input);
+  const button_save = document.createElement('button');
+  button_save.textContent = 'Save';
+  buttons.appendChild(button_save);
+  const button_edit = document.createElement('button');
+  button_edit.textContent = 'Edit';
+  button_edit.style.display = "none";
+  buttons.appendChild(button_edit);
+  const button_remove = document.createElement('button');
+  button_remove.textContent = 'Remove';
+  buttons.appendChild(button_remove);
+  
+  button_save.onclick = function(){
+	const text_developer = developer_input.value;
+	const text_title = title_input.value;
+	developer_content.textContent = text_developer;
+	title_content.textContent = text_title;
+	developer_input.style.display = "none";
+	title_input.style.display = "none";
+	button_edit.style.display = "inline";
+	button_save.style.display = "none";
+  }
+  button_edit.onclick = function(){
+	developer_content.textContent = "";
+	title_content.textContent = "";
+	developer_input.style.display = "inline";
+	title_input.style.display = "inline";
+	button_edit.style.display = "none";
+	button_save.style.display = "inline";
+  }
+  button_remove.onclick = function(){
+	library.removeChild(row);
+	row.remove();
+  }
+}
+</script>
+</body>
+</html>
